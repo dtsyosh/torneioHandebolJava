@@ -11,7 +11,7 @@ import java.util.Random;
  *
  * @author yosh
  */
-public class Time {
+public class Time implements Comparable<Time> {
 
     private String nome;
     private int numeroVitorias;
@@ -29,7 +29,6 @@ public class Time {
         this.numeroDerrotas = 0;
         this.numeroGolsMarcados = 0;
         this.numeroGolsSofridos = 0;
-        this.pontos = 0;
     }
 
     public String getNome() {
@@ -104,7 +103,7 @@ public class Time {
             this.adicionarDerrota();
             adversario.adicionarVitoria();
         }
-        
+
         //Incrementando os gols marcados por ambos os times
         this.setNumeroGolsMarcados(golsTime1);
         adversario.setNumeroGolsMarcados(golsTime2);
@@ -112,6 +111,37 @@ public class Time {
         this.setNumeroGolsSofridos(golsTime2);
         adversario.setNumeroGolsSofridos(golsTime1);
 
+    }
+
+    @Override
+    public int compareTo(Time outroTime) {
+
+        if (this.getPontos() > outroTime.getPontos()) //Se este time tem mais pontos, joga mais para esquerda
+            return -1;
+        if (this.getPontos() < outroTime.getPontos()) //Se o outro time tem mais pontos, joga este time para direita         
+            return 1;
+
+        /*
+            Se chegou até aqui, é porque o número de pontos dos times são iguais, então tento ordenar por numero
+            de vitorias
+        */
+        if (this.getNumeroVitorias() > outroTime.getNumeroVitorias()) 
+            return -1; 
+        if (this.getNumeroVitorias() < outroTime.getNumeroVitorias()) 
+            return 1;
+        
+        /*
+            Se chegou até aqui é por que o numero de vitórias também são iguais
+            só resta tentar ordenar por saldo de gols
+        */
+        
+        if(this.getSaldoGols() > outroTime.getSaldoGols())
+            return -1;
+        if(this.getSaldoGols() < outroTime.getSaldoGols())
+            return 1;
+        
+        //Se chegar até aqui é por que pode deixar do jeito que está mesmo..
+        return 0;
     }
 
 }
