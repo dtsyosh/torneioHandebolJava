@@ -113,8 +113,13 @@ public class Time implements Comparable<Time> {
 
     }
 
+    /*
+        Método que a classe Collections utiliza para ordenar.
+        Nesse caso eu estou sobrescrevendoo "@Override" para se ajustar
+        ao meu problema.
+    */
     @Override
-    public int compareTo(Time outroTime) {
+    public int compareTo(Time outroTime) {  
 
         if (this.getPontos() > outroTime.getPontos()) //Se este time tem mais pontos, joga mais para esquerda
             return -1;
