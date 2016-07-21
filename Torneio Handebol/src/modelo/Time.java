@@ -5,12 +5,14 @@
  */
 package modelo;
 
+import java.util.Random;
+
 /**
  *
  * @author yosh
  */
 public class Time {
-    
+
     private String nome;
     private int numeroVitorias;
     private int numeroDerrotas;
@@ -18,6 +20,7 @@ public class Time {
     private int numeroGolsMarcados;
     private int numeroGolsSofridos;
     private int pontos;
+    private int saldoGols;
 
     public Time(String nome) {
         this.nome = nome;
@@ -43,7 +46,6 @@ public class Time {
 
     public void adicionarVitoria() {
         this.numeroVitorias++;
-        this.atualizarPontos();
     }
 
     public int getNumeroDerrotas() {
@@ -52,7 +54,6 @@ public class Time {
 
     public void adicionarDerrota() {
         this.numeroDerrotas++;
-        this.atualizarPontos();
     }
 
     public int getNumeroEmpates() {
@@ -61,7 +62,6 @@ public class Time {
 
     public void adicionarEmpate() {
         this.numeroEmpates++;
-        this.atualizarPontos();
     }
 
     public int getNumeroGolsMarcados() {
@@ -81,14 +81,37 @@ public class Time {
     }
 
     public int getPontos() {
-        return pontos;
+        return this.numeroDerrotas + (this.numeroEmpates * 2) + (this.numeroVitorias * 3);
     }
 
-    private void atualizarPontos() {
-        this.pontos  = numeroVitorias * 3;
-        this.pontos += numeroEmpates * 2;
-        this.pontos += numeroDerrotas;
+    public int getSaldoGols() {
+        return this.numeroGolsMarcados - this.numeroGolsSofridos;
     }
-    
-    
+
+    public void jogar(Time adversario) {
+        Random gerarNumero = new Random();
+
+        int golsTime1 = gerarNumero.nextInt(7);
+        int golsTime2 = gerarNumero.nextInt(7);
+
+        if (golsTime1 > golsTime2) {    //Se o time 1 venceu
+            this.adicionarVitoria();
+            adversario.adicionarDerrota();
+        } else if (golsTime1 == golsTime2) {    //Se empatou
+            this.adicionarEmpate();
+            adversario.adicionarEmpate();
+        } else {    //Se o time 1 perdeu
+            this.adicionarDerrota();
+            adversario.adicionarVitoria();
+        }
+        
+        //Incrementando os gols marcados por ambos os times
+        this.setNumeroGolsMarcados(golsTime1);
+        adversario.setNumeroGolsMarcados(golsTime2);
+        //Incrementando os gols sofridos por ambos os times
+        this.setNumeroGolsSofridos(golsTime2);
+        adversario.setNumeroGolsSofridos(golsTime1);
+
+    }
+
 }
