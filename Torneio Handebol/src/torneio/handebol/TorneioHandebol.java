@@ -8,7 +8,7 @@ import modelo.Time;
 
 public class TorneioHandebol {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         List<Time> listaTimes = new ArrayList();
         Scanner ler = new Scanner(System.in);
 
@@ -21,21 +21,25 @@ public class TorneioHandebol {
         realizarJogos(listaTimes);  //Realizando os jogos entre os times
         Collections.sort(listaTimes); //Ordenando a lista de times (tabela)
 
-        System.out.print("Qual relatorio deseja exibir? ->[1~3]<- pressione 0 para sair: ");
-        int opcao = ler.nextInt();
+        int opcao;
         Time t;
-        while (opcao != 0) {
+        do {
+            System.out.print("Escolha uma opcao\n0. Sair\n1. Ver os 3 primeiros colocados.\n2. Ver os 3 ultimos colocados.\n"
+                    + "3. Ver a tabela completa.\nSua escolha: ");
+            opcao = ler.nextInt();
             switch (opcao) {
+                case 0:
+                    return;
                 case 1:
-                    System.out.println("Times                   V    E    D   GM   GS  Pontos");
+                    System.out.println("Times:                  V    E    D   GM   GS  Pontos");
                     for (int i = 0; i < 3; i++) {
                         t = listaTimes.get(i);
-                        System.out.printf("%-15s %9d %4d %4d %4d %4d %5d\n",t.getNome(), t.getVitorias(), t.getEmpates(), t.getDerrotas(),
+                        System.out.printf("%-15s %9d %4d %4d %4d %4d %5d\n", t.getNome(), t.getVitorias(), t.getEmpates(), t.getDerrotas(),
                                 t.getGolsMarcados(), t.getGolsSofridos(), t.getPontos());
                     }
                     break;
                 case 2:
-                    System.out.println("Times                   V    E    D   GM   GS  Pontos");
+                    System.out.println("Times:                  V    E    D   GM   GS  Pontos");
                     for (int i = listaTimes.size() - 3; i < listaTimes.size(); i++) {
                         t = listaTimes.get(i);
                         System.out.printf("%-15s %9d %4d %4d %4d %4d %5d\n", t.getNome(), t.getVitorias(), t.getEmpates(), t.getDerrotas(),
@@ -43,17 +47,19 @@ public class TorneioHandebol {
                     }
                     break;
                 case 3:
-                    System.out.println("Times                   V    E    D   GM   GS  Pontos");
+                    System.out.println("Times:                  V    E    D   GM   GS  Pontos");
                     for (int i = 0; i < listaTimes.size(); i++) {
                         t = listaTimes.get(i);
                         System.out.printf("%-15s %9d %4d %4d %4d %4d %5d\n", t.getNome(), t.getVitorias(), t.getEmpates(), t.getDerrotas(),
                                 t.getGolsMarcados(), t.getGolsSofridos(), t.getPontos());
                     }
+                    break;
+                default:
+                    System.out.println("Opção incorreta, escolha uma opção 0 <= n <= 3.");
             }
-            System.out.print("Qual relatorio deseja exibir? ->[1~3]<- pressione 0 para sair: ");
-            opcao = ler.nextInt();
-
-        }
+            ler.nextLine();
+            ler.nextLine();
+        }while (true);
     }
 
     public static void realizarJogos(List<Time> listaTimes) {
