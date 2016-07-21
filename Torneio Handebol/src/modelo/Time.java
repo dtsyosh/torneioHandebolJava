@@ -43,6 +43,7 @@ public class Time {
 
     public void adicionarVitoria() {
         this.numeroVitorias++;
+        this.atualizarPontos();
     }
 
     public int getNumeroDerrotas() {
@@ -51,6 +52,7 @@ public class Time {
 
     public void adicionarDerrota() {
         this.numeroDerrotas++;
+        this.atualizarPontos();
     }
 
     public int getNumeroEmpates() {
@@ -59,6 +61,7 @@ public class Time {
 
     public void adicionarEmpate() {
         this.numeroEmpates++;
+        this.atualizarPontos();
     }
 
     public int getNumeroGolsMarcados() {
@@ -81,8 +84,8 @@ public class Time {
         return pontos;
     }
 
-    public void atualizarPontos() {
-        this.pontos += numeroVitorias * 3;
+    private void atualizarPontos() {
+        this.pontos  = numeroVitorias * 3;
         this.pontos += numeroEmpates * 2;
         this.pontos += numeroDerrotas;
     }
