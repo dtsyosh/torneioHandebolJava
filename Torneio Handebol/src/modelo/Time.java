@@ -21,6 +21,12 @@ public class Time {
 
     public Time(String nome) {
         this.nome = nome;
+        this.numeroVitorias = 0;
+        this.numeroEmpates = 0;
+        this.numeroDerrotas = 0;
+        this.numeroGolsMarcados = 0;
+        this.numeroGolsSofridos = 0;
+        this.pontos = 0;
     }
 
     public String getNome() {
@@ -35,24 +41,24 @@ public class Time {
         return numeroVitorias;
     }
 
-    public void setNumeroVitorias(int numeroVitorias) {
-        this.numeroVitorias = numeroVitorias;
+    public void adicionarVitoria() {
+        this.numeroVitorias++;
     }
 
     public int getNumeroDerrotas() {
         return numeroDerrotas;
     }
 
-    public void setNumeroDerrotas(int numeroDerrotas) {
-        this.numeroDerrotas = numeroDerrotas;
+    public void adicionarDerrota() {
+        this.numeroDerrotas++;
     }
 
     public int getNumeroEmpates() {
         return numeroEmpates;
     }
 
-    public void setNumeroEmpates(int numeroEmpates) {
-        this.numeroEmpates = numeroEmpates;
+    public void adicionarEmpate() {
+        this.numeroEmpates++;
     }
 
     public int getNumeroGolsMarcados() {
@@ -60,7 +66,7 @@ public class Time {
     }
 
     public void setNumeroGolsMarcados(int numeroGolsMarcados) {
-        this.numeroGolsMarcados = numeroGolsMarcados;
+        this.numeroGolsMarcados += numeroGolsMarcados;
     }
 
     public int getNumeroGolsSofridos() {
@@ -68,15 +74,17 @@ public class Time {
     }
 
     public void setNumeroGolsSofridos(int numeroGolsSofridos) {
-        this.numeroGolsSofridos = numeroGolsSofridos;
+        this.numeroGolsSofridos += numeroGolsSofridos;
     }
 
     public int getPontos() {
         return pontos;
     }
 
-    public void setPontos(int pontos) {
-        this.pontos = pontos;
+    public void atualizarPontos() {
+        this.pontos += numeroVitorias * 3;
+        this.pontos += numeroEmpates * 2;
+        this.pontos += numeroDerrotas;
     }
     
     
