@@ -14,21 +14,21 @@ import java.util.Random;
 public class Time implements Comparable<Time> {
 
     private String nome;
-    private int numeroVitorias;
-    private int numeroDerrotas;
-    private int numeroEmpates;
-    private int numeroGolsMarcados;
-    private int numeroGolsSofridos;
+    private int vitorias;
+    private int derrotas;
+    private int empates;
+    private int golsMarcados;
+    private int golsSofridos;
     private int pontos;
     private int saldoGols;
 
     public Time(String nome) {
         this.nome = nome;
-        this.numeroVitorias = 0;
-        this.numeroEmpates = 0;
-        this.numeroDerrotas = 0;
-        this.numeroGolsMarcados = 0;
-        this.numeroGolsSofridos = 0;
+        this.vitorias = 0;
+        this.empates = 0;
+        this.derrotas = 0;
+        this.golsMarcados = 0;
+        this.golsSofridos = 0;
     }
 
     public String getNome() {
@@ -39,52 +39,52 @@ public class Time implements Comparable<Time> {
         this.nome = nome;
     }
 
-    public int getNumeroVitorias() {
-        return numeroVitorias;
+    public int getVitorias() {
+        return vitorias;
     }
 
     public void adicionarVitoria() {
-        this.numeroVitorias++;
+        this.vitorias++;
     }
 
-    public int getNumeroDerrotas() {
-        return numeroDerrotas;
+    public int getDerrotas() {
+        return derrotas;
     }
 
     public void adicionarDerrota() {
-        this.numeroDerrotas++;
+        this.derrotas++;
     }
 
-    public int getNumeroEmpates() {
-        return numeroEmpates;
+    public int getEmpates() {
+        return empates;
     }
 
     public void adicionarEmpate() {
-        this.numeroEmpates++;
+        this.empates++;
     }
 
-    public int getNumeroGolsMarcados() {
-        return numeroGolsMarcados;
+    public int getGolsMarcados() {
+        return golsMarcados;
     }
 
-    public void setNumeroGolsMarcados(int numeroGolsMarcados) {
-        this.numeroGolsMarcados += numeroGolsMarcados;
+    public void setGolsMarcados(int numeroGolsMarcados) {
+        this.golsMarcados += numeroGolsMarcados;
     }
 
-    public int getNumeroGolsSofridos() {
-        return numeroGolsSofridos;
+    public int getGolsSofridos() {
+        return golsSofridos;
     }
 
-    public void setNumeroGolsSofridos(int numeroGolsSofridos) {
-        this.numeroGolsSofridos += numeroGolsSofridos;
+    public void setGolsSofridos(int numeroGolsSofridos) {
+        this.golsSofridos += numeroGolsSofridos;
     }
 
     public int getPontos() {
-        return this.numeroDerrotas + (this.numeroEmpates * 2) + (this.numeroVitorias * 3);
+        return this.derrotas + (this.empates * 2) + (this.vitorias * 3);
     }
 
     public int getSaldoGols() {
-        return this.numeroGolsMarcados - this.numeroGolsSofridos;
+        return this.golsMarcados - this.golsSofridos;
     }
 
     public void jogar(Time adversario) {
@@ -105,11 +105,11 @@ public class Time implements Comparable<Time> {
         }
 
         //Incrementando os gols marcados por ambos os times
-        this.setNumeroGolsMarcados(golsTime1);
-        adversario.setNumeroGolsMarcados(golsTime2);
+        this.setGolsMarcados(golsTime1);
+        adversario.setGolsMarcados(golsTime2);
         //Incrementando os gols sofridos por ambos os times
-        this.setNumeroGolsSofridos(golsTime2);
-        adversario.setNumeroGolsSofridos(golsTime1);
+        this.setGolsSofridos(golsTime2);
+        adversario.setGolsSofridos(golsTime1);
 
     }
 
@@ -125,9 +125,9 @@ public class Time implements Comparable<Time> {
             Se chegou até aqui, é porque o número de pontos dos times são iguais, então tento ordenar por numero
             de vitorias
         */
-        if (this.getNumeroVitorias() > outroTime.getNumeroVitorias()) 
+        if (this.getVitorias() > outroTime.getVitorias()) 
             return -1; 
-        if (this.getNumeroVitorias() < outroTime.getNumeroVitorias()) 
+        if (this.getVitorias() < outroTime.getVitorias()) 
             return 1;
         
         /*
